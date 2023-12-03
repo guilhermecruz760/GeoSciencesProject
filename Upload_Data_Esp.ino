@@ -6,7 +6,7 @@
 #define SMTP_PORT 465
 
 #define AUTHOR_EMAIL "pgeociencias@gmail.com"
-#define AUTHOR_PASSWORD "jmym wafn vjgo uhqa"
+#define AUTHOR_PASSWORD "jmymwafnvjgouhqa"
 
 #define RECIPIENT_EMAIL "guilhermecruz760@gmail.com"
 #define RECIPIENT_NAME "Guilherme"
