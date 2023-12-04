@@ -21,7 +21,7 @@ void smtpCallback(SMTP_Status status);
 const int senPin1 = 34;
 const int senPin2 = 32;
 const int transistorPin = 16;
-unsigned long period = 594;  // 900 seconds = 15 minutes
+unsigned long period = 547;  // 900 seconds = 15 minutes
 
 
 String URL = "http://geoscienceprojects.space/test_data.php";
