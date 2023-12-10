@@ -148,6 +148,33 @@ void loop() {
       Serial.print("Error sending Email" + smtp.errorReason());
   }
 
+  if (((value1 - value2) > 5) || ((value1 - value2) < -5)) {
+    Session_Config session;
+    session.server.host_name = SMTP_HOST;
+    session.server.port = SMTP_PORT;
+    session.login.email = AUTHOR_EMAIL;
+    session.login.password = AUTHOR_PASSWORD;
+    session.login.user_domain = "";
+
+    SMTP_Message message;
+    message.sender.name = "ESP 32";
+    message.sender.email = AUTHOR_EMAIL;
+    message.subject = "Sensors might be misconnected or reading wrong values";
+    message.addRecipient(RECIPIENT_NAME, RECIPIENT_EMAIL);
+
+    //Send message
+    String textMsg = "The difference between the readings of the two sensors are excedding 5%, which can indicate misreadings or potencial malfunction";
+    message.text.content = textMsg.c_str();
+    message.text.charSet = "us-ascii";
+    message.text.transfer_encoding = Content_Transfer_Encoding::enc_7bit;
+
+    if (!smtp.connect(&session))
+      printf("Message sent");
+
+    if (!MailClient.sendMail(&smtp, &message))
+      Serial.print("Error sending Email" + smtp.errorReason());
+  }
+
   // Disconnect from WiFi before entering deep sleep
   WiFi.disconnect(true);
 
