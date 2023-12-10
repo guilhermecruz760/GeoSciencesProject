@@ -21,13 +21,15 @@ void smtpCallback(SMTP_Status status);
 const int senPin1 = 34;
 const int senPin2 = 32;
 const int transistorPin = 16;
-unsigned long period = 547;  // 900 seconds = 15 minutes
+const int LED = 26;
+unsigned long period = 20;  // 900 seconds = 15 minutes
 
 
 String URL = "http://geoscienceprojects.space/test_data.php";
 
 const char *ssid = "Vodafone-72BD23";
 const char *password = "k97E7mU6uQ";
+
 
 int value1 = 50;
 int value2 = 50;
@@ -58,10 +60,17 @@ void connectWiFi() {
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+
+  digitalWrite(LED, HIGH);
+
+
 }
 
 void setup() {
   Serial.begin(115200);
+
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
 
   // Add delay to ensure serial monitor is opened before uploading
   delay(1000);
@@ -142,7 +151,6 @@ void loop() {
   // Disconnect from WiFi before entering deep sleep
   WiFi.disconnect(true);
 
-  //Turn off board led
   Serial.println("Entering deep sleep");
 
   // Enter deep sleep for the specified period (in microseconds)
